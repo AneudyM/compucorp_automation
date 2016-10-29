@@ -10,4 +10,5 @@ default['compucorp']['user'] = 'ubuntu'
 default['compucorp']['civicrm_package'] = 'civicrm-4.7.12-drupal.tar.gz'
 default['compucorp']['logsbucket'] = 'logsbucket'
 default['compucorp']['backupsbucket'] = 'backupsbucket'
+default['compucorp']['php_version'] = '5.6'
 # Hardcoded password only for testing purposes

@@ -63,14 +63,6 @@ directory "/var/www" do
 	not_if do ::Dir.exists?("/var/www") end
 end
 
-#directory "/var/www/html" do
-#	owner 'www-data'
-#	group 'www-data'
-#	mode '0755'
-#	action :create
-#	not_if do ::Dir.exists?("/var/www/html") end
-#end
-
 directory '/etc/nginx/ssl' do
 	recursive true
 	action :create

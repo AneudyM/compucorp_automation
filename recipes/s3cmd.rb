@@ -11,7 +11,7 @@ template '/etc/s3cmd/.s3cfg' do
 	mode '0600'
 end
 
-# install the s3cmd tool
+# Install s3cmd
 package 's3cmd' do
 	action :install
 end

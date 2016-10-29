@@ -4,7 +4,9 @@
 #
 # Copyright (c) 2016 Aneudy Mota, All Rights Reserved.
 
-package [ 'php7.0-fpm', 'php7.0-cli', 'php7.0-mysql', 'php7.0-gd', 'php7.0-curl', 'php7.0-xml' ] do
+php_version = node['compucorp']['php_version']
+
+package [ "php#{php_version}-fpm", "php#{php_version}-cli", "php#{php_version}-mysql", "php#{php_version}-gd", "php#{php_version}-curl", "php#{php_version}-xml" ] do
 	action :install
 end
 
@@ -30,18 +32,19 @@ template '/etc/nginx/fastcgi_params' do
 	mode '0644'
 end
 
-template '/etc/php/7.0/fpm/php.ini' do
+template "/etc/php/#{php_version}/fpm/php.ini" do
 	source 'php.ini.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
 end
 
-template '/etc/php/7.0/fpm/php-fpm.conf' do
+template "/etc/php/#{php_version}/fpm/php-fpm.conf" do
 	source 'php-fpm.conf.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
+	variables ({ :php_version => "#{php_version}" })
 end
 
 template '/etc/nginx/sites-available/default' do
@@ -49,44 +52,45 @@ template '/etc/nginx/sites-available/default' do
 	owner 'root'
 	group 'root'
 	mode '0644'
+	variables ({ :php_version => "#{php_version}" })
 end
 
-template '/etc/php/7.0/mods-available/json.ini' do
+template "/etc/php/#{php_version}/mods-available/json.ini" do
 	source 'json.ini.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
 end
 
-template '/etc/php/7.0/mods-available/mysqli.ini' do
+template "/etc/php/#{php_version}/mods-available/mysqli.ini" do
 	source 'mysqli.ini.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
 end
 
-template '/etc/php/7.0/mods-available/mysql.ini' do
+template "/etc/php/#{php_version}/mods-available/mysql.ini" do
 	source 'mysql.ini.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
 end
 
-template '/etc/php/7.0/mods-available/opcache.ini' do
+template "/etc/php/#{php_version}/mods-available/opcache.ini" do
 	source 'opcache.ini.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
 end
 
-template '/etc/php/7.0/mods-available/pdo.ini' do
+template "/etc/php/#{php_version}/mods-available/pdo.ini" do
 	source 'pdo.ini.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
 end
 
-template '/etc/php/7.0/mods-available/pdo_mysql.ini' do
+template "/etc/php/#{php_version}/mods-available/pdo_mysql.ini" do
 	source 'pdo_mysql.ini.erb'
 	owner 'root'
 	group 'root'
