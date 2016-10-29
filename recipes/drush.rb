@@ -28,9 +28,29 @@ script 'install_drush' do
 	code <<-EOH
 		git clone https://github.com/drush-ops/drush.git
 		sudo ln -s #{user_home}/drush/drush /usr/local/bin/drush
-		cd drush/
+		mv drush .drush
+		cd .drush/
 		composer install \
 		&& sudo touch #{check_files}/drush_civicrm_support_installed
 	EOH
 	not_if do ::File.exists?("#{check_files}/drush_civicrm_support_installed") end
 end
+
+script 'drush_civicrm_support' do
+	intepreter "bash"
+	cwd "#{user_home}/.drush/includes"
+	user user
+	code <<-EOH
+		wget https://raw.githubusercontent.com/civicrm/civicrm-drupal/7.x-master/drush/civicrm.drush.inc
+		drush cache-clear drush \
+		&& touch #{check_files}/added_drush_civicrm_support
+	EOH
+	not_if do ::File.exists?("#{check_files}/added_drush_civicrm_support") end
+end
+		
+		
+		
+		
+		
+		
+		
