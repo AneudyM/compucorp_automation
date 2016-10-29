@@ -30,12 +30,12 @@ end
 ## CREATE CIVICRM DATABASE USER
 ###########################################
 cookbook_file "#{home_dir}/scripts/create_civicrm_db_user.sh" do
-	source "create_civicrm_db_user.sql"
+	source "create_civicrm_db_user.sh"
 	mode "0755"
 end
 
 execute 'create_civicrm_db_user_script' do
-		command "#{home_dir}/scripts/create_civicrm_db_user.sh"
+		command "sh #{home_dir}/scripts/create_civicrm_db_user.sh"
 		action :run
 end
 
