@@ -29,13 +29,18 @@ end
 ###########################################
 ## CREATE CIVICRM DATABASE USER
 ###########################################
-cookbook_file "#{db_scripts}/create_civicrm_db_user.sql" do
+cookbook_file "#{home_dir}/scripts/create_civicrm_db_user.sh" do
 	source "create_civicrm_db_user.sql"
 	mode "0755"
 end
 
-execute 'create_civicrm_db_user' do
-	command "mysql -uroot -p#{test_password} < #{db_scripts}/create_civicrm_db_user.sql && touch #{check_files}/created_civicrm_db_user"
+execute 'create_civicrm_db_user_script' do
+		command "#{home_dir}/scripts/create_civicrm_db_user.sh"
+		action :run
+end
+
+execute 'mysql_civicrm_db_user_load' do
+	command "mysql -uroot -p#{test_password} < #{home_dir}/scripts/create_civicrm_db_user.sql && touch #{check_files}/created_civicrm_db_user"
 	action :run
 	not_if do ::File.exists?("#{check_files}/created_civicrm_db_user") end
 end
