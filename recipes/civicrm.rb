@@ -40,7 +40,7 @@ execute 'create_civicrm_db_user_script' do
 end
 
 execute 'mysql_civicrm_db_user_load' do
-	command "mysql -uroot -p#{test_password} < #{home_dir}/scripts/create_civicrm_db_user.sql && touch #{check_files}/created_civicrm_db_user"
+	command "mysql -uroot -p#{test_password} < #{db_scripts}/create_civicrm_db_user.sql && touch #{check_files}/created_civicrm_db_user"
 	action :run
 	not_if do ::File.exists?("#{check_files}/created_civicrm_db_user") end
 end
