@@ -27,7 +27,7 @@ script 'install_drush' do
 	user user
 	code <<-EOH
 		git clone https://github.com/drush-ops/drush.git
-		sudo ln -s #{user_home}/drush/drush /usr/local/lib/drush
+		sudo ln -s #{user_home}/drush/drush /usr/local/bin/drush
 		cd drush/
 		composer install \
 		&& sudo touch #{check_files}/drush_civicrm_support_installed
