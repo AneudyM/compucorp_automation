@@ -4,7 +4,7 @@
 passHash=$(sudo openssl passwd -1 admin1234);
 
 # Create DB user using password hash
-echo "CREATE USER 'civicrm'@'localhost' IDENTIFIED BY '$passHash';
+echo "CREATE USER 'civicrm'@'localhost' IDENTIFIED BY 'admin1234';
       GRANT SELECT, 
 			INSERT, 
 			UPDATE, 
@@ -18,5 +18,5 @@ echo "CREATE USER 'civicrm'@'localhost' IDENTIFIED BY '$passHash';
 	       TRIGGER, 
 	   CREATE ROUTINE, 
 	   ALTER ROUTINE ON civicrm.* TO 'civicrm'@'localhost' 
-	   IDENTIFIED BY '$passHash';" > /opt/compucorp/db_scripts/create_civicrm_db_user.sql;
+	   IDENTIFIED BY 'admin1234';" > /opt/compucorp/db_scripts/create_civicrm_db_user.sql;
     
