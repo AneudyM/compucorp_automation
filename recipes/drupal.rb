@@ -26,6 +26,7 @@ script 'install_drupal' do
 				--db-url="mysql://drupal:#{test_password}@localhost/drupal" \
 				--site-name="Compucorp Project" \
 				--clean-url=0
+		sudo mkdir /var/www/html/sites/default/custom_ext
 		sudo chown -R www-data:www-data /var/www/html/ \
 		&& sudo touch #{check_files}/drupal_installed
 	EOH
