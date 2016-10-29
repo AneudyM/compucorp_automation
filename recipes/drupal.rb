@@ -18,7 +18,7 @@ script 'install_drupal' do
 		tar -zxf drupal.tar.gz
 		sudo mv drupal-7.51/ /var/www/html
 		cd /var/www/html
-		sudo drush site-install \
+		sudo yes | drush site-install \
 				--account-name=admin \
 				--account-pass=admin1234 \
 				--db-su=root \
