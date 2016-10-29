@@ -17,6 +17,14 @@ script 'install_drupal' do
 		wget -O drupal.tar.gz https://ftp.drupal.org/files/projects/drupal-7.51.tar.gz
 		tar -zxf drupal.tar.gz
 		sudo mv drupal-7.51/ /var/www/html
+		sudo drush site-install \
+				--account-name=admin \
+				--account-pass=admin1234 \
+				--db-su=root \
+				--db-su-pw=admin1234 \
+				--db-url="mysql://drupal:admin1234@localhost/drupal" \
+				--site-name="Compucorp Project" \
+				--clean-url=0
 		sudo chown -R www-data:www-data /var/www/html/ \
 		&& sudo touch #{check_files}/drupal_installed
 	EOH
