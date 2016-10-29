@@ -20,10 +20,10 @@ script 'install_drupal' do
 		cd /var/www/html
 		sudo yes | drush site-install \
 				--account-name=admin \
-				--account-pass=admin1234 \
+				--account-pass=#{test_password} \
 				--db-su=root \
-				--db-su-pw=admin1234 \
-				--db-url="mysql://drupal:admin1234@localhost/drupal" \
+				--db-su-pw=#{test_password} \
+				--db-url="mysql://drupal:#{test_password}@localhost/drupal" \
 				--site-name="Compucorp Project" \
 				--clean-url=0
 		sudo chown -R www-data:www-data /var/www/html/ \
