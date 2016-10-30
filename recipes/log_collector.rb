@@ -28,7 +28,7 @@ cron 'send_nginx_logs_to_S3' do
 	hour '*'
 	day '*'
 	weekday '*'
-	command "s3cmd --config=#{home_dir}/etc/.s3cfg sync #{home_dir}/backups/nginx/ s3://#{nginx_logs}/"
+	command "s3cmd --config=/etc/s3cmd/.s3cfg sync #{home_dir}/backups/nginx/ s3://#{nginx_logs}/"
 	action :create
 end
 
