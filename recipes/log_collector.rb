@@ -32,7 +32,7 @@ cron 'send_logs_to_S3' do
 	action :create
 end
 
-con 'remove_local_backups' do
+cron 'remove_local_backups' do
 	minute '*/8'
 	hour '*'
 	day '*'
