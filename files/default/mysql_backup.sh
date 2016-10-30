@@ -1,7 +1,7 @@
 #!/bin/bash
 
 appDir="/opt/compucorp";
-mysqlBackupDir="${appDir}/backups";
+mysqlBackupDir="${appDir}/backups/mysql";
 
 # Store current date
 now=$(date +"%F")
@@ -11,7 +11,7 @@ currTime=$(date +'%F-%H%M%S')
 mysqlArchive="mysql.${currTime}.tar.gz"
 
 # Set MySQL username and password
-MYSQLUSER="root"
+MYSQLUSER="root" 
 MYSQLPASSWORD="admin1234"
 
 # Verify the backup buffer directory exists
