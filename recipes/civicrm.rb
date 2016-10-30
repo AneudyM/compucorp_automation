@@ -45,20 +45,24 @@ execute 'mysql_civicrm_db_user_load' do
 	not_if do ::File.exists?("#{check_files}/created_civicrm_db_user") end
 end
 
-#script 'install_civicrm' do
-#	interpreter "bash"
-#	cwd user_home
-#	code <<-EOH
-#		wget -O civicrm.tar.gz https://download.civicrm.org/civicrm-4.7.12-drupal.tar.gz
-#		mv civicrm.tar.gz #{drupal_home}/sites/all/modules/
-#		sudo drush civicrm-install --dbhost=localhost --dbname=civicrm --dbpass=admin1234 --dbuser=civicrm --destination=sites/all/modules --load_generated_data --ssl=on --tarfile=sites/all/modules/civicrm.tar.gz
-#		&& touch #{check_files}/civicrm_installed
-#	EOH
-#	not_if do ::File.exists?("#{check_files}/civicrm_installed") end
-#end
+script 'install_civicrm' do
+	interpreter "bash"
+	cwd drupal_home
+	code <<-EOH
+		wget -O sites/all/modules/civicrm.tar.gz https://download.civicrm.org/civicrm-4.7.12-drupal.tar.gz
+		yes | sudo drush civicrm-install \
+					--dbhost=localhost \
+					--dbname=civicrm \
+					--dbpass=admin1234 \
+					--dbuser=civicrm \
+					--destination=sites/all/modules \
+					--load_generated_data=0 \
+					--ssl=on \
+					--tarfile=sites/all/modules/civicrm.tar.gz 
+		sudo chown -R www-data:www-data ./
+		&& touch #{check_files}/civicrm_installed
+	EOH
+	not_if do ::File.exists?("#{check_files}/civicrm_installed") end
+end
 
-#execute 'change_ownership_html' do
-#	command "chown -R www-data:www-data /var/www/html/"
-#	action :run
-#end
 		
