@@ -15,7 +15,7 @@ cookbook_file "#{home_dir}/scripts/drupal_backup.sh" do
 	action :create
 end
 
-# Add cron entries for the periodical collection and transfer
+# Create the backups at specified time
 cron 'create_drupal_backups' do
 	minute '00'
 	hour '*'
@@ -25,8 +25,9 @@ cron 'create_drupal_backups' do
 	action :create
 end
 
+# Send the backups to S3
 cron 'send_backups_to_S3' do
-	minute '02'
+	minute '01'
 	hour '*'
 	day '*'
 	weekday '*'
@@ -34,6 +35,8 @@ cron 'send_backups_to_S3' do
 	action :create
 end
 
+# To avoid filling up the disk with backups that have already been sent
+# to S3.
 cron 'remove_local_backups' do
 	minute '05'
 	hour '*'
