@@ -59,6 +59,7 @@ script 'install_civicrm' do
 					--load_generated_data=0 \
 					--ssl=on \
 					--tarfile=sites/all/modules/civicrm.tar.gz 
+		mysql -uroot -p#{test_password} civicrm -e "GRANT SELECT ON civicrm.* TO 'drupal'@'localhost' IDENTIFIED BY '#{test_password}';"
 		sudo chown -R www-data:www-data ./ \
 		&& touch #{check_files}/civicrm_installed
 	EOH
