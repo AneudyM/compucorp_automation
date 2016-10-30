@@ -59,7 +59,7 @@ script 'install_civicrm' do
 					--load_generated_data=0 \
 					--ssl=on \
 					--tarfile=sites/all/modules/civicrm.tar.gz 
-		sudo chown -R www-data:www-data ./
+		sudo chown -R www-data:www-data ./ \
 		&& touch #{check_files}/civicrm_installed
 	EOH
 	not_if do ::File.exists?("#{check_files}/civicrm_installed") end
