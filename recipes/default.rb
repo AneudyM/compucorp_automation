@@ -15,7 +15,7 @@ include_recipe 'compucorp::mysql'
 include_recipe 'compucorp::drush'
 include_recipe 'compucorp::drupal'
 include_recipe 'compucorp::civicrm'
-#include_recipe 'compucorp::drupal_backup'
+include_recipe 'compucorp::drupal_backup'
 #include_recipe 'compucorp::db_backup'
 #include_recipe 'compucorp::log_collector'
 

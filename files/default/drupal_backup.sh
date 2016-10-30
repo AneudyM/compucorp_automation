@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DRUPAL_HOME="/var/www/html"
+DRUPAL_HOME="/var/www"
 appDir="/opt/compucorp";
 drupalBackupDir="${appDir}/backups/drupal";
 
