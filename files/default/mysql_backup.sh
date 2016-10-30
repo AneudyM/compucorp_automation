@@ -11,8 +11,8 @@ currTime=$(date +'%F-%H%M%S')
 mysqlArchive="mysql.${currTime}.tar.gz"
 
 # Set MySQL username and password
-MYSQLUSER="[<youruser>]" 
-MYSQLPASSWORD="[<yourpassword>]"
+MYSQLUSER="root" 
+MYSQLPASSWORD="admin1234"
 
 # Verify the backup buffer directory exists
 [ ! -d $mysqlBackupDir ] && mkdir -p ${mysqlBackupDir}
