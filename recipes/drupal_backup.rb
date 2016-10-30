@@ -17,7 +17,7 @@ end
 
 # Add cron entries for the periodical collection and transfer
 cron 'create_drupal_backups' do
-	minute '*'
+	minute '00'
 	hour '*'
 	day '*'
 	weekday '*'
@@ -26,10 +26,20 @@ cron 'create_drupal_backups' do
 end
 
 cron 'send_backups_to_S3' do
-	minute '*'
+	minute '02'
 	hour '*'
 	day '*'
 	weekday '*'
-	command "s3cmd --config=/etc/s3cmd/.s3cfg sync #{home_dir}/backups/drupal/ s3://#{drupal_backups}/"
+	command "s3cmd --config=/etc/s3cmd/.s3cfg sync #{home_dir}/backups/drupal/ s3://#{drupal_backups}/ && rm #{home_dir}/backups/drupal/*"
 	action :create
 end
+
+cron 'remove_local_backups' do
+	minute '05'
+	hour '*'
+	day '*'
+	weekday '*'
+	command "rm #{home_dir}/backups/drupal/*"
+	action :create
+end
+	
