@@ -9,8 +9,9 @@ check_files = node['compucorp']['check_files']
 script 'Create Self-Signed Certificate' do
 	interpreter "bash"
 	code <<-EOH
-		openssl req -x509 -nodes -sha256 -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt -subj "/C=US/ST=Michigan/L=Kalamazoo/O=Compucorp/OU=DevOps/CN=compucorptasks.com"
-		openssl dhparam -out /etc/nginx/ssl/dhparam.pem 512 \
+		openssl req -nodes -new -sha256 -newkey rsa:2048 -keyout /etc/nginx/ssl/server_name.key -out /etc/nginx/ssl/server_name.csr -subj "/C=US/ST=Michigan/L=Kalamazoo/O=Compucorp/OU=DevOps/CN=localhost"
+		openssl x509 -req -sha256 -days 365 -in server.csr -signkey /etc/nginx/ssl/server_name.key -out /etc/nginx/ssl/server_name.crt
+		openssl dhparam -out /etc/nginx/ssl/dhparams.pem 2048 \
 		&& touch #{check_files}/created_slef_signed_certificate
 	EOH
 	not_if do ::File.exists?("#{check_files}/created_self_signed_certificate") end
