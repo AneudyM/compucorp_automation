@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Generate a HASH from your passphrase
-passHash=$(sudo openssl passwd -1 admin1234);
-
 # Create DB user using password hash
 echo "CREATE USER 'civicrm'@'localhost' IDENTIFIED BY 'admin1234';
       GRANT SELECT, 

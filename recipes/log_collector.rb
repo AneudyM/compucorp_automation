@@ -5,7 +5,7 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 home_dir = node['compucorp']['home_dir']
-logsbucket = node['compucorp']['logsbucket']
+nginx_backups = node['compucorp']['nginx_backups']
 
 cookbook_file "#{home_dir}/scripts/log_backup.sh" do
 	source 'log_backup.sh'
@@ -15,8 +15,8 @@ cookbook_file "#{home_dir}/scripts/log_backup.sh" do
 end
 
 cron 'create_container_logs' do
-	minute '55'
-	hour '18'
+	minute '*/5'
+	hour '*'
 	day '*'
 	weekday '*'
 	command "#{home_dir}/scripts/log_backup.sh"
@@ -24,10 +24,19 @@ cron 'create_container_logs' do
 end
 
 cron 'send_logs_to_S3' do
-	minute '00'
-	hour '19'
+	minute '*/6'
+	hour '*'
 	day '*'
 	weekday '*'
-	command "s3cmd --config=#{home_dir}/etc/.s3cfg sync #{home_dir}/backups/nginx/ s3://#{logsbucket}"
+	command "s3cmd --config=#{home_dir}/etc/.s3cfg sync #{home_dir}/backups/nginx/ s3://#{nginx_backups}"
+	action :create
+end
+
+con 'remove_local_backups' do
+	minute '*/8'
+	hour '*'
+	day '*'
+	weekday '*'
+	command "rm #{home_dir}/backups/nginx/*"
 	action :create
 end

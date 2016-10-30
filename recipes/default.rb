@@ -17,7 +17,7 @@ include_recipe 'compucorp::drupal'
 include_recipe 'compucorp::civicrm'
 include_recipe 'compucorp::drupal_backup'
 include_recipe 'compucorp::db_backup'
-#include_recipe 'compucorp::log_collector'
+include_recipe 'compucorp::log_collector'
 
 execute 'Restart NGINX' do
 	command 'service nginx restart'

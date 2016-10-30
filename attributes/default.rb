@@ -12,4 +12,6 @@ default['compucorp']['drupal_backups'] = 'public-projects/compucorp/drupal_backu
 default['compucorp']['nginx_logs'] = 'public-projects/compucorp/nginx_logs'
 default['compucorp']['mysql_backups'] = 'public-projects/compucorp/mysql_backups'
 default['compucorp']['php_version'] = '5.6'
+default['compucorp']['aws_access_key'] = 'YOUR_ACCESS_KEY'
+default['compucorp']['aws_secret_key'] = 'YOUR_SECRET_KEY'
 # Hardcoded password only for testing purposes

@@ -4,13 +4,13 @@
 #
 # Copyright (c) 2016 Aneudy Mota, All Rights Reserved.
 
-drupal_home = node['compucorp']['drupal_home']
-check_files = node['compucorp']['check_files']
-test_password = node['compucorp']['test_password']
+    drupal_home = node['compucorp']['drupal_home']
+    check_files = node['compucorp']['check_files']
+  test_password = node['compucorp']['test_password']
 civicrm_package = node['compucorp']['civicrm_package'] 
-user_home = "/home/#{node['compucorp']['user']}"
-db_scripts = node['compucorp']['db_scripts']
-home_dir = node['compucorp']['home_dir']
+      user_home = "/home/#{node['compucorp']['user']}"
+     db_scripts = node['compucorp']['db_scripts']
+       home_dir = node['compucorp']['home_dir']
 
 ###########################################
 ## CREATE CIVICRM DATABASE
@@ -53,7 +53,7 @@ script 'install_civicrm' do
 		yes | sudo drush civicrm-install \
 					--dbhost=localhost \
 					--dbname=civicrm \
-					--dbpass=admin1234 \
+					--dbpass=#{test_password} \
 					--dbuser=civicrm \
 					--destination=sites/all/modules \
 					--load_generated_data=0 \
@@ -65,5 +65,3 @@ script 'install_civicrm' do
 	EOH
 	not_if do ::File.exists?("#{check_files}/civicrm_installed") end
 end
-
-		
