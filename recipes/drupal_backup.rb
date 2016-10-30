@@ -17,7 +17,7 @@ end
 
 # Create the backups at specified time
 cron 'create_drupal_backups' do
-	minute '00'
+	minute '*/5'
 	hour '*'
 	day '*'
 	weekday '*'
@@ -26,19 +26,19 @@ cron 'create_drupal_backups' do
 end
 
 # Send the backups to S3
-cron 'send_backups_to_S3' do
-	minute '01'
+cron 'send_drupal_backups_to_S3' do
+	minute '*/6'
 	hour '*'
 	day '*'
 	weekday '*'
-	command "s3cmd --config=/etc/s3cmd/.s3cfg sync #{home_dir}/backups/drupal/ s3://#{drupal_backups}/ && rm #{home_dir}/backups/drupal/*"
+	command "s3cmd --config=/etc/s3cmd/.s3cfg sync #{home_dir}/backups/drupal/ s3://#{drupal_backups}/"
 	action :create
 end
 
 # To avoid filling up the disk with backups that have already been sent
 # to S3.
-cron 'remove_local_backups' do
-	minute '05'
+cron 'remove_local_drupal_backups' do
+	minute '*/8'
 	hour '*'
 	day '*'
 	weekday '*'

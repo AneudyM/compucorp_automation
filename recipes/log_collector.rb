@@ -23,16 +23,16 @@ cron 'create_nginx_logs_backups' do
 	action :create
 end
 
-cron 'send_logs_to_S3' do
+cron 'send_nginx_logs_to_S3' do
 	minute '*/6'
 	hour '*'
 	day '*'
 	weekday '*'
-	command "s3cmd --config=#{home_dir}/etc/.s3cfg sync #{home_dir}/backups/nginx/ s3://#{nginx_logs}"
+	command "s3cmd --config=#{home_dir}/etc/.s3cfg sync #{home_dir}/backups/nginx/ s3://#{nginx_logs}/"
 	action :create
 end
 
-cron 'remove_local_backups' do
+cron 'remove_local_nginx_logs' do
 	minute '*/8'
 	hour '*'
 	day '*'

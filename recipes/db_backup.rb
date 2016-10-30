@@ -31,7 +31,7 @@ cron 'send_backups_to_S3' do
 	hour '*'
 	day '*'
 	weekday '*'
-	command "s3cmd --config=#{home_dir}/etc/.s3cfg sync #{home_dir}/backups/mysql/ s3://#{mysql_backups}"
+	command "s3cmd --config=#{home_dir}/etc/.s3cfg sync #{home_dir}/backups/mysql/ s3://#{mysql_backups}/"
 	action :create
 end
 
