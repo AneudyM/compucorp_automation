@@ -14,5 +14,5 @@ script 'Create Self-Signed Certificate' do
 		openssl dhparam -out /etc/nginx/ssl/dhparams.pem 2048 \
 		&& touch #{check_files}/created_slef_signed_certificate
 	EOH
-	not_if do ::File.exists?("#{check_files}/created_self_signed_certificate") end
+	not_if do ::File.exists?("#{check_files}/created_slef_signed_certificate") end
 end
