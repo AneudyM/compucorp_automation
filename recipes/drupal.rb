@@ -15,9 +15,8 @@ script 'install_drupal' do
 	cwd user_home
 	code <<-EOH
 		wget -O drupal.tar.gz https://ftp.drupal.org/files/projects/drupal-7.51.tar.gz
-		tar -zxf drupal.tar.gz
-		sudo mv drupal-7.51/* /var/www/html/
-		cd /var/www/html
+		tar -zxf drupal.tar.gz -C /var/www/html/ --strip-components 1
+		cd /var/www/html/
 		sudo yes | drush site-install \
 				--account-name=admin \
 				--account-pass=#{test_password} \
